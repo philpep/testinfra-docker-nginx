@@ -12,6 +12,13 @@ def test_nginx_socket(Socket):
     assert socket.is_listening
 
 
+def test_nginx_process(Process):
+    master = Process.get(pid=1)
+    assert master.args == "nginx: master process nginx"
+    workers = Process.filter(ppid=master.pid)
+    assert len(workers) == 4
+
+
 def test_http_request(docker_ip):
     response = requests.get("http://" + docker_ip)
     assert response.status_code == 200

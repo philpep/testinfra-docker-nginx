@@ -35,3 +35,8 @@ def Package(Docker):
 @pytest.fixture()
 def Socket(Docker):
     return Docker.get_module("Socket")
+
+
+@pytest.fixture()
+def Process(Docker):
+    return Docker.get_module("Process")
